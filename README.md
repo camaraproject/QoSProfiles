@@ -36,6 +36,9 @@ The repository has no (pre)releases yet, work in progress is within the main bra
 
 <!-- CAMARA:RELEASE-INFO:END -->
 
+> [!NOTE]
+> Released versions of `qos-profiles` up to and including `1.2.0-rc.3` can be found in [QualityOnDemand](https://github.com/camaraproject/QualityOnDemand); see the [QualityOnDemand releases](https://github.com/camaraproject/QualityOnDemand/releases) there.
+
 ## Contributing
 
 * Meetings are held virtually
