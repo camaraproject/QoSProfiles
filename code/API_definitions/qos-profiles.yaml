@@ -2,11 +2,11 @@ openapi: 3.0.3
 info:
   title: QoS Profiles
   description: |
-    The Quality-of-Service (QoS) Profiles API provides a set of predefined network performance characteristics, such as latency, throughput, and priority, identified by a unique name. These profiles allow API consumers to specify the desired network behavior for their application's data traffic, ensuring optimal performance. By selecting an appropriate QoS profile, API consumers can request stable latency (reduced jitter) or throughput for specific data flows between client devices and application servers when used by the Quality-On-Demand APIs.
+    The Quality-of-Service (QoS) Profiles API provides a set of predefined network performance characteristics, such as latency, throughput, and priority, identified by a unique name. These profiles allow API consumers to specify the desired network behavior for their application's data traffic, ensuring optimal performance. By selecting an appropriate QoS profile, API consumers can request stable latency (reduced jitter) or throughput; what a selected profile is applied to is determined by the API that references it.
 
     # Introduction
 
-    QoS Profiles are used in conjunction with other Quality-On-Demand APIs, to offer the API consumer the capability to request for stable latency (reduced jitter) or throughput for some specified application data flows between application clients (within a user device) and Application Servers (backend services). The API consumer has a pre-defined set of Quality of Service (QoS) profiles which they could choose from depending on their latency or throughput requirements. The QoS profiles are defined by the API provider and are mapped to the connectivity characteristics of the supported networks.
+    QoS Profiles are used in conjunction with APIs in QualityOnDemand, QoSBooking, DedicatedNetworks and NetworkSliceBooking, to offer the API consumer the capability to request stable latency (reduced jitter) or throughput. The API consumer has a pre-defined set of Quality of Service (QoS) profiles which they could choose from depending on their latency or throughput requirements. The QoS profiles are defined by the API provider and are mapped to the connectivity characteristics of the supported networks.
 
     # API functionality
 
