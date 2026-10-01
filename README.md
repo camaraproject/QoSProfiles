@@ -11,7 +11,7 @@
 
 Incubating API Repository to evolve and maintain the definitions and documentation of QoSProfiles Service API(s) within the Sub Project [ConnectivityQualityManagement](https://lf-camaraproject.atlassian.net/wiki/x/hAClB)
 
-* API Repository [wiki page](https://lf-camaraproject.atlassian.net/wiki/x/hAClB)
+* API Repository [wiki page](https://lf-camaraproject.atlassian.net/wiki/x/RwDRRQ)
 
 > [!NOTE]
 > This repository is being split out of [QualityOnDemand](https://github.com/camaraproject/QualityOnDemand), where the `qos-profiles` API was originally defined and released. For releases up to and including QualityOnDemand's Fall25 release (r3.2), see the [QualityOnDemand releases](https://github.com/camaraproject/QualityOnDemand/releases) and the history of [qos-profiles.yaml](https://github.com/camaraproject/QualityOnDemand/commits/main/code/API_definitions/qos-profiles.yaml) there. The initial content seed into this repository is tracked in a separate pull request.
