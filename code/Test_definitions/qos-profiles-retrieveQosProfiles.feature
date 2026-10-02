@@ -22,19 +22,19 @@ Feature: CAMARA QoS Profiles API, vwip - Operation retrieveQosProfiles
     And the header "Authorization" is set to a valid access token
     And the header "x-correlator" complies with the schema at "../common/CAMARA_common.yaml#/components/schemas/XCorrelator"
     # Properties not explicitly overwritten in the Scenarios can take any values compliant with the schema
-    And the request body is set by default to a request body compliant with the schema at "/components/schemas/QosProfileDeviceRequest"
+    And the request body is set by default to a request body compliant with the schema at "#/components/schemas/QosProfileDeviceRequest"
 
   ############################ Happy Path Scenarios #############################################
 
   @qos_profiles_retrieveQosProfiles_01_generic_success_scenario
   Scenario: Common validations for any success scenario
     # Valid testing device and default request body compliant with the schema
-    Given a request body compliant with the schema at "/components/schemas/QosProfileDeviceRequest"
+    Given a request body compliant with the schema at "#/components/schemas/QosProfileDeviceRequest"
     When the request "retrieveQosProfiles" is sent
     Then the response status code is 200
     And the response header "Content-Type" is "application/json"
     And the response header "x-correlator" has same value as the request header "x-correlator"
-    And each item of the response array, if any, complies with the OAS schema at "/components/schemas/QosProfile"
+    And each item of the response array, if any, complies with the OAS schema at "#/components/schemas/QosProfile"
     # TBC: Add additional constraints, such as max* properties must be higher than min* equivalent properties, etc
 
   @qos_profiles_retrieveQosProfiles_02_filter_by_name_only
@@ -45,8 +45,18 @@ Feature: CAMARA QoS Profiles API, vwip - Operation retrieveQosProfiles
     Then the response status code is 200
     And the response header "Content-Type" is "application/json"
     And the response header "x-correlator" has same value as the request header "x-correlator"
-    And the response array has only one item which complies with the OAS schema at "/components/schemas/QosProfile"
+    And the response array has only one item which complies with the OAS schema at "#/components/schemas/QosProfile"
     And the response property "$[0].name" value is equal to the request body property "$.name"
+
+  @qos_profiles_retrieveQosProfiles_02b_filter_by_name_not_found
+  Scenario: Retrieve QoS profiles by a name that matches no profile
+    Given the request body property "$.name" is set to a QoS profile name that does not match any existing profile
+    And the request body properties "$.device" and "$.status" are not included
+    When the request "retrieveQosProfiles" is sent
+    Then the response status code is 200
+    And the response header "Content-Type" is "application/json"
+    And the response header "x-correlator" has same value as the request header "x-correlator"
+    And the response body is []
 
   @qos_profiles_retrieveQosProfiles_03_filter_by_status_only
   Scenario Outline: Retrieve QoS profiles only by status
@@ -56,7 +66,7 @@ Feature: CAMARA QoS Profiles API, vwip - Operation retrieveQosProfiles
     Then the response status code is 200
     And the response header "Content-Type" is "application/json"
     And the response header "x-correlator" has same value as the request header "x-correlator"
-    And each item of the response array, if any, complies with the OAS schema at "/components/schemas/QosProfile"
+    And each item of the response array, if any, complies with the OAS schema at "#/components/schemas/QosProfile"
     And each item of the response array, if any, has property "$[*].status" equal to <status>
 
     Examples:
@@ -74,7 +84,7 @@ Feature: CAMARA QoS Profiles API, vwip - Operation retrieveQosProfiles
     Then the response status code is 200
     And the response header "Content-Type" is "application/json"
     And the response header "x-correlator" has same value as the request header "x-correlator"
-    And each item of the response array complies with the OAS schema at "/components/schemas/QosProfile"
+    And each item of the response array complies with the OAS schema at "#/components/schemas/QosProfile"
     And the restricted QoS Profiles are returned in the response
 
   @qos_profiles_retrieveQosProfiles_05_not_return_restricted_profiles
@@ -86,7 +96,7 @@ Feature: CAMARA QoS Profiles API, vwip - Operation retrieveQosProfiles
     Then the response status code is 200
     And the response header "Content-Type" is "application/json"
     And the response header "x-correlator" has same value as the request header "x-correlator"
-    And each item of the response array complies with the OAS schema at "/components/schemas/QosProfile"
+    And each item of the response array complies with the OAS schema at "#/components/schemas/QosProfile"
     And no restricted QoS Profile is included in the response
 
   @qos_profiles_retrieveQosProfiles_06_device_qos_profiles_not_found
@@ -188,7 +198,7 @@ Feature: CAMARA QoS Profiles API, vwip - Operation retrieveQosProfiles
 
   @qos_profiles_retrieveQosProfiles_400.01_schema_not_compliant
   Scenario: Invalid Argument. Generic Syntax Exception
-    Given the request body is set to any value which is not compliant with the schema at "/components/schemas/QosProfileDeviceRequest"
+    Given the request body is set to any value which is not compliant with the schema at "#/components/schemas/QosProfileDeviceRequest"
     When the request "retrieveQosProfiles" is sent
     Then the response status code is 400
     And the response header "x-correlator" has same value as the request header "x-correlator"
