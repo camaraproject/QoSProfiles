@@ -1,0 +1,13 @@
+repository:
+  repository_name: QoSProfiles
+  release_tag: r1.1
+  release_type: pre-release-rc
+  release_date: null
+  src_commit_sha: 8ce8f4d68aad65ca988a50c5e8a8c09246a65ab2
+apis:
+- api_name: qos-profiles
+  api_version: 1.2.0-rc.4
+  api_title: QoS Profiles
+dependencies:
+  commonalities_release: r4.4 (0.9.0)
+  identity_consent_management_release: r4.2 (0.5.0)
