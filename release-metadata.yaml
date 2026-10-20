@@ -2,7 +2,7 @@ repository:
   repository_name: QoSProfiles
   release_tag: r1.1
   release_type: pre-release-rc
-  release_date: null
+  release_date: '2026-10-20T16:23:13Z'
   src_commit_sha: 8ce8f4d68aad65ca988a50c5e8a8c09246a65ab2
 apis:
 - api_name: qos-profiles
