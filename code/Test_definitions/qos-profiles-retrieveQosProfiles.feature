@@ -1,4 +1,4 @@
-Feature: CAMARA QoS Profiles API, vwip - Operation retrieveQosProfiles
+Feature: CAMARA QoS Profiles API, v1.2.0 - Operation retrieveQosProfiles
   # Input to be provided by the implementation to the tester
   #
   # Implementation indications:
@@ -17,7 +17,7 @@ Feature: CAMARA QoS Profiles API, vwip - Operation retrieveQosProfiles
 
   Background: Common retrieveQosProfiles setup
     Given an environment at "apiRoot"
-    And the resource "/qos-profiles/vwip/retrieve-qos-profiles"
+    And the resource "/qos-profiles/v1/retrieve-qos-profiles"
     And the header "Content-Type" is set to "application/json"
     And the header "Authorization" is set to a valid access token
     And the header "x-correlator" complies with the schema at "../common/CAMARA_common.yaml#/components/schemas/XCorrelator"
