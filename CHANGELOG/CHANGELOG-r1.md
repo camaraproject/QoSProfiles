@@ -73,23 +73,38 @@ The API definition(s) are based on
 
 ### Breaking changes
 
-* N/A
+* No breaking changes for API consumers: the HTTP method, path, request and response payloads are unchanged. Note that the operationId `retrieveQoSProfiles` was renamed to `retrieveQosProfiles` (#16), so code generated from the spec (client/server stubs) and test tooling that references the operationId or scenario tags will need updating.
 
 ### Added
 
-* N/A
+* `maxLength` and `maxItems` constraints on `QosProfile.description`, `Availability` and its `networks` array, `countryName`, and the `retrieveQosProfiles` 200 response array (QualityOnDemand#575)
+* The mandatory `info.description` sections from the Commonalities templates (authorization and authentication, additional error responses, request body strictness) (QualityOnDemand#575, #26)
+* Test scenarios for `429`, invalid `x-correlator`, and `retrieveQosProfiles` with a `name` that matches no profile (returns `200` with an empty array) (QualityOnDemand#575, #26)
+* The QoS Profile user story (`QoSProfile_User_Story.md`) and the QoS Profile mapping table (`QoSProfile_Mapping_Table.md`) in `documentation/API_documentation`, moved from QualityOnDemand (#36)
 
 ### Changed
 
-* N/A
+* The API moved from QualityOnDemand to the new QoSProfiles repository. `externalDocs.url` now points to `https://github.com/camaraproject/QoSProfiles` (#18)
+* The API description no longer limits QoS Profiles to Quality-On-Demand. It now lists QualityOnDemand, QoSBooking, DedicatedNetworks and NetworkSliceBooking as the APIs that use it (#19)
+* Aligned with Commonalities r4.4 (`x-camara-commonalities: 0.9.0`). Common definitions (`openId`, `x-correlator`, `Device`, `ErrorInfo`) are reused via `$ref` into `code/common/CAMARA_common.yaml` (QualityOnDemand#575, #12, #26)
+* Error responses now use the Commonalities r4.4 response catalogue (`BadRequest400`, `Unauthenticated401`, `PermissionDenied403`, `NotFound404`, `IdentifierNotFound404`, `TooManyRequests429`) instead of the API's own definitions. `Generic422` is renamed to `RetrieveQosProfilesUnprocessable422` and uses the common `*_DEVICE` 422 examples (#26)
+* The `404` response of `retrieveQosProfiles` now declares only `IDENTIFIER_NOT_FOUND`. `NOT_FOUND` was removed because this operation has no resource path that can be missing (#26)
+* The `Duration.value` maximum is reduced from `2147483647` to `99999` (#24, #29)
+* Test definitions are aligned with the Commonalities sample service template, and schema pointers use the `#/components/...` form throughout (QualityOnDemand#575, #26)
 
 ### Fixed
 
-* N/A
+* The operationId `retrieveQoSProfiles` is corrected to `retrieveQosProfiles`. The feature file and scenario tags were renamed to match (#16)
+* The `targetMinDownstreamRate` description is corrected (QualityOnDemand#543)
+* The redundant `format: string` is removed from the `QosProfileName` schema (QualityOnDemand#549)
+* The API description uses the terms `API consumer` (replacing `developer`) and `QoS Session` consistently (QualityOnDemand#547, QualityOnDemand#574)
+* The `countryName` description now cites ISO 3166-1 alpha-2 instead of ISO 3166-2 (#14)
+* The "DCSP" typo in the `serviceClass` table is now "DSCP", and the reference to the archived HomeDevicesQoD API is removed (#15)
+* The CAMARA API Design Guide link now points to Commonalities r4.4 instead of r3.3 (#17, #26)
 
 ### Removed
 
-* N/A
+* The API's own error response components (`Generic400`, `Generic401`, `Generic403`, `NotFound404`, `RetrieveQosProfilesNotFound404`, `Generic429`). Commonalities references replace them (QualityOnDemand#575, #26)
 
 **Full Changelog**: https://github.com/camaraproject/QoSProfiles/commits/r1.2
 
