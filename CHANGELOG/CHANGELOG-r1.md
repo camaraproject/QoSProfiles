@@ -68,6 +68,8 @@ The API definition(s) are based on
 
 **qos-profiles 1.2.0 is a minor update of this API.**
 
+Changes documented below are compared to version 1.1.0, released in [QualityOnDemand r3.2](https://github.com/camaraproject/QualityOnDemand/releases/tag/r3.2). They consolidate the release candidates 1.2.0-rc.3 ([QualityOnDemand r4.1](https://github.com/camaraproject/QualityOnDemand/releases/tag/r4.1)) and 1.2.0-rc.4 ([r1.1](https://github.com/camaraproject/QoSProfiles/releases/tag/r1.1)). The API moved from QualityOnDemand to this repository after 1.2.0-rc.3.
+
 - API definition **with inline documentation**:
   - [View it on ReDoc](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/camaraproject/QoSProfiles/r1.2/code/API_definitions/qos-profiles.yaml&nocors)
   - [View it on Swagger Editor](https://camaraproject.github.io/swagger-ui/?url=https://raw.githubusercontent.com/camaraproject/QoSProfiles/r1.2/code/API_definitions/qos-profiles.yaml)
@@ -106,7 +108,7 @@ The API definition(s) are based on
 
 * N/A
 
-**Full Changelog**: https://github.com/camaraproject/QoSProfiles/commits/r1.2
+**Full Changelog**: since 1.1.0 in QualityOnDemand https://github.com/camaraproject/QualityOnDemand/compare/r3.2...r4.1 (up to 1.2.0-rc.3), then in this repository https://github.com/camaraproject/QoSProfiles/commits/r1.2
 
 # r1.1
 
