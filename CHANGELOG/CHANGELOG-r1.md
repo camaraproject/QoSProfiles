@@ -77,7 +77,7 @@ Changes documented below are compared to version 1.1.0, released in [QualityOnDe
 
 ### Breaking changes
 
-* No breaking changes for API consumers: HTTP methods, paths, and request and response payloads are unchanged. Note that the operationId `retrieveQoSProfiles` is renamed to `retrieveQosProfiles` (by @hdamker in https://github.com/camaraproject/QoSProfiles/pull/16), so code generated from the spec (client/server stubs) and test tooling that references the operationId or scenario tags need updating.
+* No breaking changes for API consumers: HTTP methods, paths, and the structure of request and response payloads are unchanged. Note that the operationId `retrieveQoSProfiles` is renamed to `retrieveQosProfiles` by @hdamker in https://github.com/camaraproject/QoSProfiles/pull/16, so code generated from the spec (client/server stubs) and test tooling that references the operationId or scenario tags need updating.
 
 ### Added
 
@@ -94,8 +94,8 @@ Changes documented below are compared to version 1.1.0, released in [QualityOnDe
   * Error responses use the Commonalities response catalogue (`BadRequest400`, `Unauthenticated401`, `PermissionDenied403`, `NotFound404`, `IdentifierNotFound404`, `TooManyRequests429`). `Generic422` is renamed to `RetrieveQosProfilesUnprocessable422` and uses the common `*_DEVICE` 422 examples
   * `400` responses no longer list the `OUT_OF_RANGE` code, and `429` responses no longer list `QUOTA_EXCEEDED`
   * The `404` response of `retrieveQosProfiles` declares only `IDENTIFIER_NOT_FOUND`. `NOT_FOUND` is removed because this operation has no resource path that can be missing
-  * Request and response properties have explicit `maxLength`, `maxItems` and `pattern` bounds, which document limits that already applied; `publicPort` has a minimum of `1`
-* The `Duration.value` maximum is reduced from `2147483647` to `99999` by @benhepworth in https://github.com/camaraproject/QoSProfiles/pull/29
+  * Request and response properties have explicit `maxLength`, `maxItems` and `pattern` bounds. In requests they document limits that already applied through existing patterns and formats; `publicPort` has a minimum of `1`. In responses, `retrieveQosProfiles` returns at most 100 QoS profiles, `countryAvailability` lists at most 250 countries with at most 100 networks each, and `description` has at most 1024 characters
+* `Duration.value`, used by `minDuration`, `maxDuration`, `packetDelayBudget` and `jitter` in QoS profile responses, has a maximum of `99999` (1.1.0 had no maximum) by @RandyLevensalor in https://github.com/camaraproject/QualityOnDemand/pull/575 and by @benhepworth in https://github.com/camaraproject/QoSProfiles/pull/29
 * Test definitions are aligned with the Commonalities r4.x sample service template; schema pointers use the `#/components/...` form by @RandyLevensalor in https://github.com/camaraproject/QualityOnDemand/pull/575 and by @hdamker in https://github.com/camaraproject/QoSProfiles/pull/26
 
 ### Fixed
