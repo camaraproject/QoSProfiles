@@ -33,12 +33,14 @@ Incubating API Repository to evolve and maintain the definitions and documentati
 ## Release Information
 
 > [!NOTE]
-> This repository has only pre-release versions available yet. Pre-releases are for testing and may change before public release.
+> Please be aware that the project will have frequent updates to the main branch. There are no compatibility guarantees associated with code in any branch, including main, until a new release is created. For example, changes may be reverted before a release is created. **For best results, use the latest available release**.
 
-* The latest pre-release is [r1.1](https://github.com/camaraproject/QoSProfiles/releases/tag/r1.1) (release candidate), with the following API versions:
-  * **qos-profiles 1.2.0-rc.4**
-  [[YAML]](https://github.com/camaraproject/QoSProfiles/blob/r1.1/code/API_definitions/qos-profiles.yaml)  [[ReDoc]](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/camaraproject/QoSProfiles/r1.1/code/API_definitions/qos-profiles.yaml&nocors)  [[Swagger]](https://camaraproject.github.io/swagger-ui/?url=https://raw.githubusercontent.com/camaraproject/QoSProfiles/r1.1/code/API_definitions/qos-profiles.yaml)
+* The latest public release is [r1.2](https://github.com/camaraproject/QoSProfiles/releases/tag/r1.2) (Sync26), with the following API versions:
+  * **qos-profiles 1.2.0**
+  [[YAML]](https://github.com/camaraproject/QoSProfiles/blob/r1.2/code/API_definitions/qos-profiles.yaml)  [[ReDoc]](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/camaraproject/QoSProfiles/r1.2/code/API_definitions/qos-profiles.yaml&nocors)  [[Swagger]](https://camaraproject.github.io/swagger-ui/?url=https://raw.githubusercontent.com/camaraproject/QoSProfiles/r1.2/code/API_definitions/qos-profiles.yaml)
 
+* The latest public release is always available here: https://github.com/camaraproject/QoSProfiles/releases/latest
+* Other releases of this repository are available in https://github.com/camaraproject/QoSProfiles/releases
 * For changes see [CHANGELOG](https://github.com/camaraproject/QoSProfiles/tree/main/CHANGELOG)
 
 _The above section is automatically synchronized by CAMARA project-administration._

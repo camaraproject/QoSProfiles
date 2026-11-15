@@ -2,6 +2,7 @@
 
 <!-- TOC:START -->
 ## Table of Contents
+- **[r1.2](#r12)**
 - [r1.1](#r11)
 <!-- TOC:END -->
 
@@ -13,6 +14,63 @@ The below sections record the changes for each API version in each release as fo
 * for the first release-candidate, all changes since the last public release
 * for subsequent release-candidate(s), only the delta to the previous release-candidate
 * for a public release, the consolidated changes since the previous public release
+
+# r1.2
+
+## Release Notes
+
+This public release contains the definition and documentation of
+* qos-profiles 1.2.0
+
+The API definition(s) are based on
+* Commonalities r4.4 (0.9.0)
+* Identity and Consent Management r4.2 (0.5.0)
+
+## qos-profiles 1.2.0
+
+**qos-profiles 1.2.0 is a minor update of this API.**
+
+Changes documented below are compared to version 1.1.0, released in [QualityOnDemand r3.2](https://github.com/camaraproject/QualityOnDemand/releases/tag/r3.2). They consolidate the release candidates 1.2.0-rc.3 ([QualityOnDemand r4.1](https://github.com/camaraproject/QualityOnDemand/releases/tag/r4.1)) and 1.2.0-rc.4 ([r1.1](https://github.com/camaraproject/QoSProfiles/releases/tag/r1.1)). The API moved from QualityOnDemand to this repository after 1.2.0-rc.3.
+
+- API definition **with inline documentation**:
+  - [View it on ReDoc](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/camaraproject/QoSProfiles/r1.2/code/API_definitions/qos-profiles.yaml&nocors)
+  - [View it on Swagger Editor](https://camaraproject.github.io/swagger-ui/?url=https://raw.githubusercontent.com/camaraproject/QoSProfiles/r1.2/code/API_definitions/qos-profiles.yaml)
+  - OpenAPI [YAML spec file](https://github.com/camaraproject/QoSProfiles/blob/r1.2/code/API_definitions/qos-profiles.yaml)
+
+### Breaking changes
+
+* No breaking changes for API consumers: HTTP methods, paths, and the structure of request and response payloads are unchanged. Note that the operationId `retrieveQoSProfiles` is renamed to `retrieveQosProfiles` by @hdamker in https://github.com/camaraproject/QoSProfiles/pull/16, so code generated from the spec (client/server stubs) and test tooling that references the operationId or scenario tags need updating.
+
+### Added
+
+* `info.description` section "Request body strictness": requests with JSON bodies containing properties not declared in the specification are rejected with `400 INVALID_ARGUMENT` by @RandyLevensalor in https://github.com/camaraproject/QualityOnDemand/pull/575
+* Test scenarios for `429` responses and invalid `x-correlator` values in both test definition files by @RandyLevensalor in https://github.com/camaraproject/QualityOnDemand/pull/575
+* Test scenario `@qos_profiles_retrieveQosProfiles_02b_filter_by_name_not_found`: calling `retrieveQosProfiles` with a `name` that matches no profile returns `200` with an empty array by @hdamker in https://github.com/camaraproject/QoSProfiles/pull/26
+
+### Changed
+
+* The API moved from QualityOnDemand to the QoSProfiles repository, together with its user story and QoS Profiles mapping table. `externalDocs.url` and the link to the mapping table now point to this repository by @hdamker in https://github.com/camaraproject/QoSProfiles/pull/18 and by @benhepworth in https://github.com/camaraproject/QoSProfiles/pull/36 and https://github.com/camaraproject/QoSProfiles/pull/40
+* The API description no longer limits QoS Profiles to QualityOnDemand. It lists the APIs in QualityOnDemand, QoSBooking, DedicatedNetworks and NetworkSliceBooking as the ones that use it by @hdamker in https://github.com/camaraproject/QoSProfiles/pull/19
+* Aligned with Commonalities r4.4 (`x-camara-commonalities: 0.9.0`, was `0.6`) by @RandyLevensalor in https://github.com/camaraproject/QualityOnDemand/pull/575 and by @hdamker in https://github.com/camaraproject/QoSProfiles/pull/26:
+  * Common definitions (`openId`, `x-correlator`, `Device`, `ErrorInfo`, error responses) are taken from `CAMARA_common.yaml`
+  * Error responses use the Commonalities response catalogue (`BadRequest400`, `Unauthenticated401`, `PermissionDenied403`, `NotFound404`, `IdentifierNotFound404`, `TooManyRequests429`). `Generic422` is renamed to `RetrieveQosProfilesUnprocessable422` and uses the common `*_DEVICE` 422 examples
+  * `400` responses no longer list the `OUT_OF_RANGE` code, and `429` responses no longer list `QUOTA_EXCEEDED`
+  * The `404` response of `retrieveQosProfiles` declares only `IDENTIFIER_NOT_FOUND`. `NOT_FOUND` is removed because this operation has no resource path that can be missing
+  * Request and response properties have explicit `maxLength`, `maxItems` and `pattern` bounds. In requests they document limits that already applied through existing patterns and formats; `publicPort` has a minimum of `1`. In responses, `retrieveQosProfiles` returns at most 100 QoS profiles, `countryAvailability` lists at most 250 countries with at most 100 networks each, and `description` has at most 1024 characters
+* `Duration.value`, used by `minDuration`, `maxDuration`, `packetDelayBudget` and `jitter` in QoS profile responses, has a maximum of `99999` (1.1.0 had no maximum) by @RandyLevensalor in https://github.com/camaraproject/QualityOnDemand/pull/575 and by @benhepworth in https://github.com/camaraproject/QoSProfiles/pull/29
+* Test definitions are aligned with the Commonalities r4.x sample service template; schema pointers use the `#/components/...` form by @RandyLevensalor in https://github.com/camaraproject/QualityOnDemand/pull/575 and by @hdamker in https://github.com/camaraproject/QoSProfiles/pull/26
+
+### Fixed
+
+* The operationId `retrieveQoSProfiles` is corrected to `retrieveQosProfiles`. The feature file and scenario tags are renamed to match by @hdamker in https://github.com/camaraproject/QoSProfiles/pull/16
+* Corrected the `targetMinDownstreamRate` description by @tlohmar in https://github.com/camaraproject/QualityOnDemand/pull/543
+* The `countryName` description cites ISO 3166-1 alpha-2 instead of ISO 3166-2 by @hdamker in https://github.com/camaraproject/QoSProfiles/pull/14
+
+### Removed
+
+* N/A
+
+**Full Changelog**: since 1.1.0 in QualityOnDemand https://github.com/camaraproject/QualityOnDemand/compare/r3.2...r4.1 (up to 1.2.0-rc.3), then in this repository https://github.com/camaraproject/QoSProfiles/commits/r1.2
 
 # r1.1
 
