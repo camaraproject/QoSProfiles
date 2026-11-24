@@ -7,15 +7,13 @@ Feature: CAMARA QoS Profiles API, vwip - Operation getQosProfile
   # Testing assets:
   # * The name of an existing QoS profile
   #
-  # References to OAS spec schemas refer to schemas specified in qos-profiles.yaml,
-  # unless the path points to "../common/CAMARA_common.yaml", in which case the
-  # schema is the one synced from CAMARA Commonalities.
+  # References to OAS spec schemas refer to schemas specified in qos-profiles.yaml
 
   Background: Common getQosProfile setup
     Given an environment at "apiRoot"
     And the resource "/qos-profiles/vwip/qos-profiles/{name}"
-    And the header "Authorization" is set to a valid access token
-    And the header "x-correlator" complies with the schema at "../common/CAMARA_common.yaml#/components/schemas/XCorrelator"
+    And the request header "Authorization" is set to a valid access token
+    And the request header "x-correlator" is non-empty and complies with the OAS schema at "#/components/schemas/XCorrelator"
     And the path param "name" is set by default to an existing QoS profile name
 
   ############################ Happy Path Scenarios #############################################
@@ -61,7 +59,7 @@ Feature: CAMARA QoS Profiles API, vwip - Operation getQosProfile
 
   @qos_profiles_getQosProfile_400.03_invalid_x-correlator
   Scenario: Invalid x-correlator header
-    Given the header "x-correlator" does not comply with the schema at "../common/CAMARA_common.yaml#/components/schemas/XCorrelator"
+    Given the header "x-correlator" does not comply with the schema at "#/components/schemas/XCorrelator"
     When the request "getQosProfile" is sent
     Then the response status code is 400
     And the response property "$.status" is 400
