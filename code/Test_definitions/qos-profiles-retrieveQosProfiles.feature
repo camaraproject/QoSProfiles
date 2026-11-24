@@ -12,15 +12,13 @@ Feature: CAMARA QoS Profiles API, vwip - Operation retrieveQosProfiles
   # * A device object identifying a device commercialized by the implementation for which the service is not applicable, if any
   #
   # References to OAS spec schemas refer to schemas specified in qos-profiles.yaml,
-  # unless the path points to "../common/CAMARA_common.yaml", in which case the
-  # schema is the one synced from CAMARA Commonalities.
 
   Background: Common retrieveQosProfiles setup
     Given an environment at "apiRoot"
     And the resource "/qos-profiles/vwip/retrieve-qos-profiles"
-    And the header "Content-Type" is set to "application/json"
-    And the header "Authorization" is set to a valid access token
-    And the header "x-correlator" complies with the schema at "../common/CAMARA_common.yaml#/components/schemas/XCorrelator"
+    And the request header "Content-Type" is set to "application/json"
+    And the request header "Authorization" is set to a valid access token
+    And the request header "x-correlator" is non-empty and complies with the OAS schema at "#/components/schemas/XCorrelator"
     # Properties not explicitly overwritten in the Scenarios can take any values compliant with the schema
     And the request body is set by default to a request body compliant with the schema at "#/components/schemas/QosProfileDeviceRequest"
 
@@ -138,10 +136,10 @@ Feature: CAMARA QoS Profiles API, vwip - Operation retrieveQosProfiles
 
     Examples:
       | device_identifier                | oas_spec_schema                                                         |
-      | $.device.phoneNumber             | ../common/CAMARA_common.yaml#/components/schemas/PhoneNumber             |
-      | $.device.ipv4Address             | ../common/CAMARA_common.yaml#/components/schemas/DeviceIpv4Address       |
-      | $.device.ipv6Address             | ../common/CAMARA_common.yaml#/components/schemas/DeviceIpv6Address       |
-      | $.device.networkAccessIdentifier | ../common/CAMARA_common.yaml#/components/schemas/NetworkAccessIdentifier |
+      | $.device.phoneNumber             | #/components/schemas/PhoneNumber             |
+      | $.device.ipv4Address             | #/components/schemas/DeviceIpv4Address       |
+      | $.device.ipv6Address             | #/components/schemas/DeviceIpv6Address       |
+      | $.device.networkAccessIdentifier | #/components/schemas/NetworkAccessIdentifier |
 
   # This scenario may happen e.g. with 2-legged access tokens, which do not identify a single device.
   @qos_profiles_retrieveQosProfiles_C01.03_device_not_found
@@ -224,7 +222,7 @@ Feature: CAMARA QoS Profiles API, vwip - Operation retrieveQosProfiles
 
   @qos_profiles_retrieveQosProfiles_400.03_invalid_x-correlator
   Scenario: Invalid x-correlator header
-    Given the header "x-correlator" does not comply with the schema at "../common/CAMARA_common.yaml#/components/schemas/XCorrelator"
+    Given the header "x-correlator" does not comply with the schema at "#/components/schemas/XCorrelator"
     When the request "retrieveQosProfiles" is sent
     Then the response status code is 400
     And the response property "$.status" is 400
