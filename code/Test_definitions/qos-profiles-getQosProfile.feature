@@ -7,15 +7,13 @@ Feature: CAMARA QoS Profiles API, vwip - Operation getQosProfile
   # Testing assets:
   # * The name of an existing QoS profile
   #
-  # References to OAS spec schemas refer to schemas specified in qos-profiles.yaml,
-  # unless the path points to "../common/CAMARA_common.yaml", in which case the
-  # schema is the one synced from CAMARA Commonalities.
+  # References to OAS spec schemas refer to schemas specified in qos-profiles.yaml
 
   Background: Common getQosProfile setup
     Given an environment at "apiRoot"
     And the resource "/qos-profiles/vwip/qos-profiles/{name}"
-    And the header "Authorization" is set to a valid access token
-    And the header "x-correlator" is non-empty and complies with the OAS schema at "#/components/schemas/XCorrelator"
+    And the request header "Authorization" is set to a valid access token
+    And the request header "x-correlator" is non-empty and complies with the OAS schema at "#/components/schemas/XCorrelator"
     And the path param "name" is set by default to an existing QoS profile name
 
   ############################ Happy Path Scenarios #############################################
