@@ -2,20 +2,22 @@ openapi: 3.0.3
 info:
   title: QoS Profiles
   description: |
-    The Quality-of-Service (QoS) Profiles API provides a set of predefined network performance characteristics, such as latency, throughput, and priority, identified by a unique name. These profiles allow API consumers to specify the desired network behavior for their application's data traffic, ensuring optimal performance. By selecting an appropriate QoS profile, API consumers can request stable latency (reduced jitter) or throughput; what a selected profile is applied to is determined by the API that references it.
+    A Quality-of-Service (QoS) Profile is a named set of target connectivity performance characteristics such as latency, throughput, and priority, that an API provider makes available. These profiles allow API consumers to specify the desired network connectivity behavior for their application's data traffic, ensuring optimal performance. By selecting an appropriate QoS Profile, API consumers can request stable latency (reduced jitter) or throughput; what a selected profile is applied to is determined by the API that references it.
+
+    The QoS Profiles API (`qos-profiles`) lets API consumers discover the available QoS Profiles and their characteristics. The use of this API is optional. API consumers can also get QoS Profile names from other sources, such as API provider documentation or a configuration portal. The QoS Profile name references the same set of characteristics, regardless of how the API consumer gets the name.
 
     # Introduction
 
-    QoS Profiles are used in conjunction with APIs in QualityOnDemand, QoSBooking, DedicatedNetworks and NetworkSliceBooking, to offer the API consumer the capability to request stable latency (reduced jitter) or throughput. The API consumer has a pre-defined set of Quality of Service (QoS) profiles which they could choose from depending on their latency or throughput requirements. The QoS profiles are defined by the API provider and are mapped to the connectivity characteristics of the supported networks.
+    QoS Profiles are used in conjunction with APIs in QualityOnDemand, QoSBooking, DedicatedNetworks and NetworkSliceBooking, to offer the API consumer the capability to request stable latency (reduced jitter) or throughput. The API consumer has a pre-defined set of Quality of Service (QoS) profiles which they could choose from depending on their latency or throughput requirements. The QoS Profiles are defined by the API provider and are mapped to the connectivity characteristics of the supported networks.
 
     # API functionality
 
     The QoS Profiles API provides the following functionality:
-    - Discover all QoS profiles offered by the API provider
-    - Discover the available QoS profiles for a specific device
+    - Discover all QoS Profiles offered by the API provider
+    - Discover the available QoS Profiles for a specific device
     - Retrieve the characteristics of a specific QoS profile by name
 
-    How QoS profiles are mapped to connectivity characteristics are subject to agreements between the API provider and the API consumer. Within the CAMARA project, you can find a sample for such a mapping of QoS profiles. [CAMARA QoS Profiles Mapping Table (REFERENCE DRAFT)](https://github.com/camaraproject/QoSProfiles/blob/main/documentation/API_documentation/QoSProfile_Mapping_Table.md)
+    How QoS Profiles are mapped to connectivity characteristics are subject to agreements between the API provider and the API consumer. Within the CAMARA project, you can find a sample for such a mapping of QoS Profiles. [CAMARA QoS Profiles Mapping Table (REFERENCE DRAFT)](https://github.com/camaraproject/QoSProfiles/blob/main/documentation/API_documentation/QoSProfile_Mapping_Table.md)
 
     <!-- CAMARA:MANDATORY:authorization-and-authentication:BEGIN -->
 
@@ -94,7 +96,7 @@ paths:
     post:
       tags:
         - QoS Profiles
-      summary: Retrieve QoS profiles
+      summary: Retrieve QoS Profiles
       description: |
         Returns all QoS Profiles that match the given criteria.
         **NOTES:**
@@ -543,8 +545,8 @@ components:
 
   examples:
     LIST_OF_QOS_PROFILES:
-      summary: A list of QoS profiles with a single entry
-      description: Example response when requesting a list of QoS profiles
+      summary: A list of QoS Profiles with a single entry
+      description: Example response when requesting a list of QoS Profiles
       value:
         - name: "voice"
           description: "QoS profile for high-quality interactive voice"
